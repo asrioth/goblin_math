@@ -5,3 +5,7 @@ class StringVar():
         self.text = text
         self.text_var = tk.StringVar()
         self.text_var.set(text)
+
+    def update(self, text):
+        self.text = text
+        self.text_var.set(text)

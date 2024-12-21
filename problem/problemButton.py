@@ -7,11 +7,9 @@ class ProblemButton(Button):
         super().__init__(window, name)
         self.problem_manager = problem_manager
     
-    def clicked(self, name):
-        print(name)
-        if self.problem_manager.check_choice(name):
+    def clicked(self):
+        if self.problem_manager.check_choice(self.name):
             self.button.config(text="***Monch***")
         else:
             self.button.config(text="***blegh***", disabledforeground="purple")
         self.button.config(bg="green", relief=tk.FLAT, highlightthickness=0, state="disabled")
-        self.window.redraw()

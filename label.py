@@ -19,6 +19,13 @@ class Label():
                  underline=-1,
                  wraplength=250
                 )
+        self.string_var = string_var
         
     def pack(self, padx, pady, side):
         self.label.pack(padx=padx, pady=pady, side=side)
+
+    def update_text(self, new_text):
+        self.string_var.update(new_text)
+
+    def destroy(self):
+        self.label.destroy()

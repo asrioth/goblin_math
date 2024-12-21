@@ -6,7 +6,7 @@ class Button():
         self.window = window
         self.button = tk.Button(window.canvas, 
                    text=name,
-                   command=lambda : self.clicked(name),
+                   command=self.clicked,
                    activebackground="red",
                    activeforeground="white",
                    anchor="center",
@@ -22,13 +22,17 @@ class Button():
                    highlightthickness=2,
                    justify="center",
                    overrelief="raised",
-                   padx=10,
+                   padx=20,
                    pady=5,
-                   width=15,
+                   #width=15,
                    wraplength=150)
+        self.name = name
     
-    def clicked(self, name):
-        print(f"{name} clicked!")
+    def clicked(self):
+        print(f"{self.name} clicked!")
 
     def pack(self, padx, pady, side):
         self.button.pack(padx=padx, pady=pady, side=side)
+
+    def destroy(self):
+        self.button.destroy()
