@@ -1,7 +1,7 @@
 class ProblemFrame():
-    def __init__(self, id, labels = [], buttons = [], progress_bar = None , frame = None):
+    def __init__(self, id):
         self.id = id
-        self.labels = labels
-        self.buttons = buttons
-        self.progress_bar = progress_bar
-        self.frame = frame
+        self.labels = []
+        self.buttons = []
+        self.progress_bar = None
+        self.frame = None

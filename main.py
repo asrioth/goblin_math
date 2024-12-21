@@ -12,15 +12,18 @@ from problem.problemDifficulty import ProblemDifficulty
 from progressBar import ProgressBar
 from guiManager import GuiManager
 from goblin import Goblin
+from resourceManager import ResourceManager
+import math
 
 def main():
     win = Window(800, 600)
     problem_difficulty = ProblemDifficulty(length=2, choice_range=1, choice_amount=5, digits=1)
     problem_manager = ProblemManager(ProblemType.ADD, problem_difficulty)
     problem_manager2 = ProblemManager(ProblemType.ADD)
-    gui_manager = GuiManager(win)
-    goblin = Goblin(problem_manager, 0, True)
-    goblin2 = Goblin(problem_manager2, 1, False)
+    resource_manager = ResourceManager()
+    goblin = Goblin(problem_manager, resource_manager, 0, True)
+    goblin2 = Goblin(problem_manager2, resource_manager, 1, False)
+    gui_manager = GuiManager(win, resource_manager)
     gui_manager.create_problem(goblin)
     gui_manager.create_problem(goblin2)
     """problem_manager.generate_problem()

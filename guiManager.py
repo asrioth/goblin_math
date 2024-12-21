@@ -8,16 +8,28 @@ from progressBar import ProgressBar
 from problem.problemFrame import ProblemFrame
 
 class GuiManager():
-    def __init__(self, window):
+    def __init__(self, window, resource_manager):
         self.window = window
+        self.resource_manager = resource_manager
+        self.resource_label = None
         self.frames = {}
+        self._create_resource_view()
 
-    def create_problem(self, goblin, what = None):
+    def _create_resource_view(self):
+        frame = tk.Frame(self.window.canvas, bg="green")
+        frame.pack(fill=tk.BOTH, expand=True, side=tk.TOP)
+        resource_display = StringVar(self.resource_manager.display)
+        self.resource_label = Label(frame, resource_display)
+        self.resource_label.pack(20, 20, tk.TOP)
+        
+
+    def create_problem(self, goblin, event = None):
         goblin.problem_manager.generate_problem()
+        self.resource_label.update_text(self.resource_manager.display)
         if goblin.id not in self.frames:
             self._create_new_problem(goblin)
         else:
-            self.frames[goblin.id].labels[goblin.id].update_text(goblin.problem_manager.problem.display)
+            self.frames[goblin.id].labels[0].update_text(goblin.problem_manager.problem.display)
             for button in self.frames[goblin.id].buttons:
                 button.destroy()
             self.frames[goblin.id].buttons = []
@@ -25,9 +37,17 @@ class GuiManager():
         self._create_problem_buttons(goblin)
         self.frames[goblin.id].progress_bar.start()
     
+    def _pick_goblin_frame_side(self, goblin):
+        if goblin.is_user:
+            side = tk.BOTTOM
+        else:
+            side = tk.TOP
+        return side
+
     def _create_new_problem(self, goblin):
         problem_frame = ProblemFrame(goblin.id)
         frame = tk.Frame(self.window.canvas, bg="green")
+        side = self._pick_goblin_frame_side(goblin)
         frame.pack(fill=tk.BOTH, expand=True, side=tk.BOTTOM)
         problem_frame.frame = frame
         problem_var = StringVar(goblin.problem_manager.problem.display)
@@ -43,6 +63,6 @@ class GuiManager():
 
     def _create_problem_buttons(self, goblin):
         for choice in goblin.problem_manager.choices:
-            problem_button = ProblemButton(self.frames[goblin.id].frame, choice, goblin.problem_manager)
+            problem_button = ProblemButton(self.frames[goblin.id].frame, choice, goblin)
             problem_button.pack(20, 20, tk.LEFT)
             self.frames[goblin.id].buttons.append(problem_button)

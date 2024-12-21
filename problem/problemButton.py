@@ -3,15 +3,18 @@ from button import Button
 from problem.problemManager import ProblemManager
 
 class ProblemButton(Button):
-    def __init__(self, root, name, problem_manager):
+    def __init__(self, root, name, goblin):
         super().__init__(root, name)
-        self.problem_manager = problem_manager
+        self.goblin = goblin
     
     def clicked(self):
-        if self.problem_manager.check_choice(self.name):
+        self.goblin.resource_manager.click_detected()
+        if self.goblin.problem_manager.check_choice(self.name):
             self.button.config(text="***Monch***")
+            self.goblin.monch()
         else:
             self.button.config(text="***blegh***", disabledforeground="purple")
+            self.goblin.blegh()
         self.button.config(bg="green", relief=tk.FLAT, highlightthickness=0, state="disabled")
 
     def destroy(self):
