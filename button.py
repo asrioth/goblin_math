@@ -2,9 +2,8 @@ import tkinter as tk
 from window import Window
 
 class Button():
-    def __init__(self, window, name):
-        self.window = window
-        self.button = tk.Button(window.canvas, 
+    def __init__(self, root, name):
+        self.button = tk.Button(root, 
                    text=name,
                    command=self.clicked,
                    activebackground="red",
@@ -36,3 +35,6 @@ class Button():
 
     def destroy(self):
         self.button.destroy()
+
+    def __repr__(self):
+        return f"button({self.name})"

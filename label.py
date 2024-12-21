@@ -1,8 +1,8 @@
 import tkinter as tk
 
 class Label():
-    def __init__(self, win, string_var):
-        self.label = tk.Label(win.canvas,
+    def __init__(self, root, string_var):
+        self.label = tk.Label(root,
                  textvariable=string_var.text_var,
                  anchor=tk.CENTER,
                  bg="green",
