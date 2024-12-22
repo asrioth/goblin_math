@@ -11,9 +11,7 @@ class Window():
         self.root.geometry(f"{width}x{height}")
         self.root.title("!!!Goblin Math!!!")
         self.root.config(bg = "green")
-        self.user_frame = tk.Frame(self.root)
-        self.user_frame.pack(fill=tk.BOTH, expand=True, side=tk.BOTTOM)
-        self.canvas = tk.Canvas(self.user_frame, width = width, height= height, bg = "green")
+        self.canvas = tk.Canvas(self.root, width = width, height= height, bg = "green")
         tk.Canvas.pack(self.canvas, fill=tk.BOTH, expand=True)
         self.root.protocol("WM_DELETE_WINDOW", self.close)
 

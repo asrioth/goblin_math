@@ -12,7 +12,7 @@ class Button():
                    bd=3,
                    bg="lightgray",
                    cursor="hand2",
-                   disabledforeground="red",
+                   disabledforeground="black",
                    fg="black",
                    font=("Arial", 12),
                    height=2,
@@ -26,6 +26,7 @@ class Button():
                    #width=15,
                    wraplength=150)
         self.name = name
+        self.root = root
     
     def clicked(self):
         print(f"{self.name} clicked!")
